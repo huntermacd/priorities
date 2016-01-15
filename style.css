@@ -90,6 +90,16 @@ h1 {
     margin: 5px;
 }
 
+h1,
+.description,
+.taps,
+.instructions {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 .description,
 .taps {
     display: inline-block;
