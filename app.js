@@ -2,6 +2,8 @@ var $addButton = $('#add');
 var $todosContainer = $('#todos');
 var localStorage = window.localStorage;
 var prioritiesApp = JSON.parse(localStorage.getItem('prioritiesApp')) || {};
+var timer;
+var touchDuration = 1000;
 
 $addButton.on('click', function(){
     var userInput = prompt('Enter description:');
@@ -14,10 +16,29 @@ $addButton.on('click', function(){
 });
 
 $todosContainer.on('click', '.todo', function(){
-    var key = $(this).find('.description').text();
-    prioritiesApp[key]++;
+    var $key = $(this).find('.description').text();
+    prioritiesApp[$key]++;
     updateLocalStorage();
     renderItems();
+});
+
+$todosContainer.on('touchstart', '.todo', function(){
+    var $this = $(this);
+    var $key = $this.find('.description').text();
+    timer = setTimeout(function(){
+        if (confirm('Remove?')){
+            $todosContainer.find($this).remove();
+            delete prioritiesApp[$key];
+            updateLocalStorage();
+            renderItems();
+        }
+    }, touchDuration);
+});
+
+$todosContainer.on('touchend', '.todo', function(){
+    if (timer){
+        clearTimeout(timer);
+    }
 });
 
 $(document).ready(function(){
