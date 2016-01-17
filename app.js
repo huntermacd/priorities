@@ -45,6 +45,12 @@ $(document).ready(function(){
     renderItems();
 });
 
+function sortItems(arr){
+    return arr.sort(function(a, b){
+        return parseInt($(a).find('.taps').text()) < parseInt($(b).find('.taps').text());
+    });
+}
+
 function updateLocalStorage(){
     localStorage.setItem('prioritiesApp', JSON.stringify(prioritiesApp));
 }
@@ -52,8 +58,11 @@ function updateLocalStorage(){
 function renderItems(){
     var parsedPrioritiesApp = JSON.parse(localStorage.getItem('prioritiesApp'));
     $todosContainer.empty();
+    var sorted = [];
     for (var item in parsedPrioritiesApp){
         var todo = '<div class="todo"><p class="description">' + item + '</p><span class="taps">' + parsedPrioritiesApp[item] + '</span></div>';
-        $todosContainer.append(todo);
+        sorted.push(todo);
     }
+    sortItems(sorted);
+    $todosContainer.append(sorted);
 }
