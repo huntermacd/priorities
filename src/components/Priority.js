@@ -36,11 +36,16 @@ class Priority extends Component {
   }
 
   _edit(item) {
-    console.log('Editing ' + Object.keys(item));
+    let { id } = this.state;
+    console.log(id);
   }
 
   _remove(item) {
-    console.log('Removing ' + item);
+    let { id } = this.state;
+    let updatedPs = JSON.parse(localStorage.getItem('priorities')).filter(p => {
+      return p.id !== id;
+    });
+    localStorage.setItem('priorities', JSON.stringify(updatedPs));
   }
 
   render() {
