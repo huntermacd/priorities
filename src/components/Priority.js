@@ -1,27 +1,13 @@
+import actions from '../flux/actions';
+import FormActions from './FormActions';
 import React, { Component, PropTypes } from 'react';
-import Actions from './Actions';
+import store from '../flux/store';
+
+store.init();
 
 class Priority extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      description: this.props.description,
-      value: this.props.value,
-      id: this.props.id,
-    };
-  }
-
   _increment() {
-    let { id } = this.state;
-    let newVal = this.state.value + 1;
-    this.setState({ value: newVal });
-    let updatedPs = JSON.parse(localStorage.getItem('priorities'));
-    updatedPs.forEach((p, i, arr) => {
-      if (p.id === id) {
-        p.value++;
-      }
-    });
-    localStorage.setItem('priorities', JSON.stringify(updatedPs));
+    actions.increment(this.props.id);
   }
 
   _dispatch(action) {
@@ -36,26 +22,26 @@ class Priority extends Component {
   }
 
   _edit(item) {
-    let { id } = this.state;
-    console.log(id);
+    // let { id } = this.props;
+    // TODO: wire-up edit functionality
   }
 
   _remove(item) {
-    let { id } = this.state;
-    let updatedPs = JSON.parse(localStorage.getItem('priorities')).filter(p => {
+    let { id } = this.props;
+    let updatedPs = store.getPriorities().filter(p => {
       return p.id !== id;
     });
-    localStorage.setItem('priorities', JSON.stringify(updatedPs));
+    store.setPriorities(updatedPs, true);
   }
 
   render() {
-    let { description, value } = this.state;
+    let { description, value } = this.props;
     return (
       <div className="Priority">
         <div onClick={ this._increment.bind(this) }>
           <p>{ description } <span>{ value }</span></p>
         </div>
-        <Actions onAction={ this._dispatch.bind(this) } />
+        <FormActions onAction={ this._dispatch.bind(this) } />
       </div>
     );
   }

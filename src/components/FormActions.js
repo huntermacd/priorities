@@ -1,23 +1,23 @@
 import React, { PropTypes } from 'react';
 
-const Actions = props =>
-  <div className="Actions">
+const FormActions = props =>
+  <div className="FormActions">
     <span
-      className="ActionsEdit"
+      className="FormActionsEdit"
       title="Edit"
       onClick={ props.onAction.bind(null, 'edit') }>EDIT</span>
     <span
-      className="ActionsRemove"
+      className="FormActionsRemove"
       title="Remove"
       onClick={ props.onAction.bind(null, 'remove') }>REMOVE</span>
   </div>
 
-Actions.propTypes = {
+FormActions.propTypes = {
   onAction: PropTypes.func,
 };
 
-Actions.defaultProps = {
+FormActions.defaultProps = {
   onAction: () => {},
 };
 
-export default Actions
+export default FormActions

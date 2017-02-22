@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "fbemitter": "^2.1.1",
     "react-scripts": "0.9.0"
   },
   "dependencies": {
