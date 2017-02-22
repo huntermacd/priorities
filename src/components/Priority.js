@@ -7,16 +7,24 @@ class Priority extends Component {
     this.state = {
       description: this.props.description,
       value: this.props.value,
+      id: this.props.id,
     };
   }
 
   _increment() {
+    let { id } = this.state;
     let newVal = this.state.value + 1;
     this.setState({ value: newVal });
+    let updatedPs = JSON.parse(localStorage.getItem('priorities'));
+    updatedPs.forEach((p, i, arr) => {
+      if (p.id === id) {
+        p.value++;
+      }
+    });
+    localStorage.setItem('priorities', JSON.stringify(updatedPs));
   }
 
   _dispatch(action) {
-    console.log(this, action);
     switch (action) {
       case 'edit':
         return this._edit(this);
@@ -38,7 +46,7 @@ class Priority extends Component {
   render() {
     let { description, value } = this.state;
     return (
-      <div>
+      <div className="Priority">
         <div onClick={ this._increment.bind(this) }>
           <p>{ description } <span>{ value }</span></p>
         </div>
@@ -51,10 +59,7 @@ class Priority extends Component {
 Priority.propTypes = {
   description: PropTypes.string.isRequired,
   value: PropTypes.number,
+  id: PropTypes.string,
 };
-
-Priority.defaultProps = {
-  value: 0,
-}
 
 export default Priority

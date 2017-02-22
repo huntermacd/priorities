@@ -2,20 +2,15 @@ import React, { Component } from 'react';
 import './App.css';
 import List from './components/List';
 
-const samplePriorities = [
-  {
-    description: "Re-write Priorities app",
-    value: 11
-  },
-  {
-    description: "Record new record",
-    value: 20
-  },
-  {
-    description: "Learn the meaning of life",
-    value: 42
-  },
-];
+let priorities = JSON.parse(localStorage.getItem('priorities'));
+
+if (!priorities) {
+  priorities = [{
+    description: "Remove this and start adding your own!",
+    value: 0,
+    id: Math.random().toString(16).substring(2),
+  }];
+}
 
 class App extends Component {
   render() {
@@ -25,7 +20,7 @@ class App extends Component {
           <h2>Priorities</h2>
         </div>
         <div className="App-intro">
-          <List priorities={ samplePriorities } />
+          <List priorities={ priorities } />
         </div>
       </div>
     );
