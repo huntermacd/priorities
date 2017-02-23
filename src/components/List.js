@@ -1,4 +1,5 @@
 import actions from '../flux/actions';
+import FlipMove from 'react-flip-move';
 import Priority from './Priority';
 import React, { Component, PropTypes } from 'react';
 import store from '../flux/store';
@@ -44,16 +45,18 @@ class List extends Component {
             <input type="submit" value="Add" />
           </form>
         </div>
-        {
-          priorities.map((p, i) => {
-            let { description, value, id } = p;
-            return <Priority
-                      key={ i }
-                      description={ description }
-                      value={ value }
-                      id={ id } />
-          })
-        }
+        <FlipMove duration={ 250 } easing="ease-in-out" staggerDurationBy={ 100 }>
+          {
+            priorities.map((p, i) => {
+              let { description, value, id } = p;
+              return <Priority
+                        key={ id }
+                        description={ description }
+                        value={ value }
+                        id={ id } />
+            })
+          }
+        </FlipMove>
       </div>
     );
   }
