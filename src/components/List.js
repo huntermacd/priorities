@@ -33,6 +33,9 @@ class List extends Component {
 
   render() {
     let { priorities } = this.state;
+    priorities.sort((a, b) => {
+      return a.value < b.value;
+    });
     return (
       <div className="List">
         <div className="Priority">
