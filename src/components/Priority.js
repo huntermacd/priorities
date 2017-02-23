@@ -1,27 +1,19 @@
+import actions from '../flux/actions';
+import FormActions from './FormActions';
 import React, { Component, PropTypes } from 'react';
-import Actions from './Actions';
+import store from '../flux/store';
+
+store.init();
 
 class Priority extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      description: this.props.description,
-      value: this.props.value,
-      id: this.props.id,
+      editing: this.props.editing,
     };
   }
-
   _increment() {
-    let { id } = this.state;
-    let newVal = this.state.value + 1;
-    this.setState({ value: newVal });
-    let updatedPs = JSON.parse(localStorage.getItem('priorities'));
-    updatedPs.forEach((p, i, arr) => {
-      if (p.id === id) {
-        p.value++;
-      }
-    });
-    localStorage.setItem('priorities', JSON.stringify(updatedPs));
+    actions.increment(this.props.id);
   }
 
   _dispatch(action) {
@@ -35,31 +27,57 @@ class Priority extends Component {
     }
   }
 
+  _save(e) {
+    e.preventDefault();
+    let newDesc = this.refs.editForm.value;
+    this.setState({
+      editing: false,
+    });
+    actions.update(this.props.id, newDesc);
+  }
+
   _edit(item) {
-    console.log('Editing ' + Object.keys(item));
+    this.setState({
+      editing: true,
+    });
   }
 
   _remove(item) {
-    console.log('Removing ' + item);
+    let { id } = this.props;
+    let updatedPs = store.getPriorities().filter(p => {
+      return p.id !== id;
+    });
+    store.setPriorities(updatedPs, true);
   }
 
   render() {
-    let { description, value } = this.state;
+    let { description, value } = this.props;
     return (
       <div className="Priority">
-        <div onClick={ this._increment.bind(this) }>
-          <p>{ description } <span>{ value }</span></p>
-        </div>
-        <Actions onAction={ this._dispatch.bind(this) } />
+        {
+          this.state.editing
+            ? <form onSubmit={ this._save.bind(this) }>
+                <input type="text" ref="editForm" defaultValue={ description } />
+                <input type="submit" value="Edit" />
+              </form>
+            : <div>
+                <div onClick={ this._increment.bind(this) }>
+                  <p>{ description } <span>{ value }</span></p>
+                </div>
+                <FormActions onAction={ this._dispatch.bind(this) } />
+              </div>
+        }
       </div>
     );
   }
 }
 
 Priority.propTypes = {
-  description: PropTypes.string.isRequired,
-  value: PropTypes.number,
-  id: PropTypes.string,
+  editing: PropTypes.bool,
+};
+
+Priority.defaultProps = {
+  editing: false,
 };
 
 export default Priority
