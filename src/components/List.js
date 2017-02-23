@@ -21,13 +21,13 @@ class List extends Component {
 
   _addNew(e) {
     e.preventDefault();
-    const inputVal = this.refs.form.value;
+    let inputVal = this.refs.createForm.value;
     let newP = {
       description: inputVal,
       value: 0,
       id: Math.random().toString(16).substring(2),
     };
-    this.refs.form.value = '';
+    this.refs.createForm.value = '';
     actions.create(newP);
   }
 
@@ -37,7 +37,7 @@ class List extends Component {
       <div className="List">
         <div className="Priority">
           <form onSubmit={ this._addNew.bind(this) }>
-            <input type="text" ref="form" placeholder="Describe new priority..." />
+            <input type="text" ref="createForm" placeholder="Describe new priority..." />
             <input type="submit" value="Add" />
           </form>
         </div>

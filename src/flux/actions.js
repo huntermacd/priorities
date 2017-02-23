@@ -6,9 +6,13 @@ const actions = {
     updatedPs.unshift(newP);
     store.setPriorities(updatedPs);
   },
-  update(id, newP) {
+  update(id, newDesc) {
     let updatedPs = store.getPriorities();
-    updatedPs[id] = newP;
+    updatedPs.forEach((p, i, arr) => {
+      if (p.id === id) {
+        p.description = newDesc;
+      }
+    });
     store.setPriorities(updatedPs);
   },
   delete(id) {

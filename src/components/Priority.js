@@ -6,6 +6,12 @@ import store from '../flux/store';
 store.init();
 
 class Priority extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      editing: this.props.editing,
+    };
+  }
   _increment() {
     actions.increment(this.props.id);
   }
@@ -21,9 +27,19 @@ class Priority extends Component {
     }
   }
 
+  _save(e) {
+    e.preventDefault();
+    let newDesc = this.refs.editForm.value;
+    this.setState({
+      editing: false,
+    });
+    actions.update(this.props.id, newDesc);
+  }
+
   _edit(item) {
-    // let { id } = this.props;
-    // TODO: wire-up edit functionality
+    this.setState({
+      editing: true,
+    });
   }
 
   _remove(item) {
@@ -38,19 +54,30 @@ class Priority extends Component {
     let { description, value } = this.props;
     return (
       <div className="Priority">
-        <div onClick={ this._increment.bind(this) }>
-          <p>{ description } <span>{ value }</span></p>
-        </div>
-        <FormActions onAction={ this._dispatch.bind(this) } />
+        {
+          this.state.editing
+            ? <form onSubmit={ this._save.bind(this) }>
+                <input type="text" ref="editForm" defaultValue={ description } />
+                <input type="submit" value="Edit" />
+              </form>
+            : <div>
+                <div onClick={ this._increment.bind(this) }>
+                  <p>{ description } <span>{ value }</span></p>
+                </div>
+                <FormActions onAction={ this._dispatch.bind(this) } />
+              </div>
+        }
       </div>
     );
   }
 }
 
 Priority.propTypes = {
-  description: PropTypes.string.isRequired,
-  value: PropTypes.number,
-  id: PropTypes.string,
+  editing: PropTypes.bool,
+};
+
+Priority.defaultProps = {
+  editing: false,
 };
 
 export default Priority
