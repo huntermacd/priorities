@@ -1,5 +1,6 @@
 import actions from '../flux/actions';
 import FormActions from './FormActions';
+import './Priority.css';
 import React, { Component, PropTypes } from 'react';
 import store from '../flux/store';
 
@@ -51,7 +52,7 @@ class Priority extends Component {
   }
 
   render() {
-    let { description, value } = this.props;
+    let { description } = this.props;
     return (
       <div className="Priority">
         {
@@ -60,9 +61,9 @@ class Priority extends Component {
                 <input type="text" ref="editForm" defaultValue={ description } />
                 <input type="submit" value="Edit" />
               </form>
-            : <div>
+            : <div className="Priority-content">
                 <div onClick={ this._increment.bind(this) }>
-                  <p>{ description } <span>{ value }</span></p>
+                  <p>{ description }</p>
                 </div>
                 <FormActions onAction={ this._dispatch.bind(this) } />
               </div>

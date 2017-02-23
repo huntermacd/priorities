@@ -1,0 +1,19 @@
+.Priority {
+  padding: 5px 10px;
+  border-top: 1px solid gray;
+}
+
+.Priority:last-of-type {
+  border-bottom: 1px solid gray;
+}
+
+.Priority p {
+  margin: 0;
+}
+
+.Priority-content {
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  padding: 5px;
+}

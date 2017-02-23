@@ -1,5 +1,6 @@
 import './App.css';
 import List from './components/List';
+import 'normalize.css';
 import React, { Component } from 'react';
 
 class App extends Component {

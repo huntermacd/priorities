@@ -1,0 +1,21 @@
+.FormActions {
+  flex: 1;
+}
+
+.FormActions button {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  background-color: gray;
+  margin: 2px 0;
+}
+
+.FormActionsEdit {
+  /*background-color: deeppink;*/
+}
+
+.FormActionsRemove {
+  /*background-color: red;*/
+}

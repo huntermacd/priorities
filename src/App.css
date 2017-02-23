@@ -1,1 +1,9 @@
+.App-header {
+  background-color: darkblue;
+  padding: 5px;
+}
 
+.App-header h2 {
+  color: #fff;
+  margin: 0 0 0 5px;
+}
