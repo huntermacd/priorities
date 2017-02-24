@@ -4,11 +4,11 @@ import React, { PropTypes } from 'react';
 const FormActions = props =>
   <div className="FormActions">
     <button
-      className="FormActionsEdit"
+      className="FormActions-edit"
       title="Edit"
       onClick={ props.onAction.bind(null, 'edit') }>&#x270E;</button>
     <button
-      className="FormActionsRemove"
+      className="FormActions-remove"
       title="Remove"
       onClick={ props.onAction.bind(null, 'remove') }>&#xd7;</button>
   </div>

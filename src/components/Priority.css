@@ -1,10 +1,10 @@
 .Priority {
   padding: 5px 10px;
-  border-top: 1px solid gray;
+  margin-bottom: 15px;
 }
 
 .Priority:last-of-type {
-  border-bottom: 1px solid gray;
+
 }
 
 .Priority p {
@@ -12,8 +12,11 @@
 }
 
 .Priority-content {
-  display: flex;
-  align-items: center;
+  border: 1px solid gray;
+  padding: 10px;
   border-radius: 5px;
-  padding: 5px;
+}
+
+.Priority-desc {
+
 }

@@ -1,5 +1,7 @@
 .FormActions {
-  flex: 1;
+  position: relative;
+  text-align: right;
+  top: 25px;
 }
 
 .FormActions button {
@@ -8,14 +10,13 @@
   border: none;
   border-radius: 50%;
   color: white;
-  background-color: gray;
-  margin: 2px 0;
+  margin-left: 5px;
 }
 
-.FormActionsEdit {
-  /*background-color: deeppink;*/
+.FormActions-edit {
+  background-color: black;
 }
 
-.FormActionsRemove {
-  /*background-color: red;*/
+.FormActions-remove {
+  background-color: firebrick;
 }

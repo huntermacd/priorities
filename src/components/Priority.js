@@ -62,7 +62,7 @@ class Priority extends Component {
                 <input type="submit" value="Edit" />
               </form>
             : <div className="Priority-content">
-                <div onClick={ this._increment.bind(this) }>
+                <div className="Priority-desc" onClick={ this._increment.bind(this) }>
                   <p>{ description }</p>
                 </div>
                 <FormActions onAction={ this._dispatch.bind(this) } />
