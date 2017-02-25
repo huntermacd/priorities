@@ -3,10 +3,6 @@
   margin-bottom: 15px;
 }
 
-.Priority:last-of-type {
-
-}
-
 .Priority p {
   margin: 0;
 }
@@ -17,6 +13,30 @@
   border-radius: 5px;
 }
 
-.Priority-desc {
+.Priority-value {
+  position: relative;
+  top: 32px;
+  font-weight: bold;
+}
 
+.Priority-plus {
+  font-weight: bold;
+  color: gold;
+  position: relative;
+  top: 14px;
+  opacity: 0;
+}
+
+.animating {
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+  animation-name: plus-one;
+}
+
+@keyframes plus-one {
+  to {
+    top: -14px;
+    opacity: 1;
+  }
 }

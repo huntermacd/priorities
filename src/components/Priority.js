@@ -1,4 +1,5 @@
 import actions from '../flux/actions';
+import classNames from 'classnames';
 import FormActions from './FormActions';
 import './Priority.css';
 import React, { Component, PropTypes } from 'react';
@@ -11,10 +12,18 @@ class Priority extends Component {
     super(props)
     this.state = {
       editing: this.props.editing,
+      animating: this.props.animating,
     };
   }
+
   _increment() {
     actions.increment(this.props.id);
+    this.setState({
+      animating: true,
+    });
+    setTimeout(() => {
+      this.setState({ animating: false });
+    }, 1000);
   }
 
   _dispatch(action) {
@@ -52,7 +61,7 @@ class Priority extends Component {
   }
 
   render() {
-    let { description } = this.props;
+    let { description, value } = this.props;
     return (
       <div className="Priority">
         {
@@ -62,8 +71,14 @@ class Priority extends Component {
                 <input type="submit" value="Edit" />
               </form>
             : <div className="Priority-content">
-                <div className="Priority-desc" onClick={ this._increment.bind(this) }>
+                <div onClick={ this._increment.bind(this) }>
                   <p>{ description }</p>
+                </div>
+                <div className="Priority-value">
+                  <p>{ value }</p>
+                </div>
+                <div className={ classNames({ "Priority-plus": true, "animating": this.state.animating }) }>
+                  <p>+1</p>
                 </div>
                 <FormActions onAction={ this._dispatch.bind(this) } />
               </div>
@@ -75,10 +90,12 @@ class Priority extends Component {
 
 Priority.propTypes = {
   editing: PropTypes.bool,
+  animating: PropTypes.bool,
 };
 
 Priority.defaultProps = {
   editing: false,
+  animating: false,
 };
 
 export default Priority
