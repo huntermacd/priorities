@@ -7,6 +7,29 @@
   margin: 0;
 }
 
+.Priority form {
+  display: flex;
+}
+
+.Priority input[type=text] {
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 5px;
+  flex: 3;
+  margin-right: 10px;
+}
+
+.Priority input[type=submit] {
+  border: none;
+  background-color: limegreen;
+  border-radius: 50%;
+  padding: 5px;
+  color: white;
+  height: 30px;
+  width: 30px;
+  font-size: 14px;
+}
+
 .Priority-content {
   border: 1px solid gray;
   padding: 10px;
@@ -15,7 +38,7 @@
 
 .Priority-value {
   position: relative;
-  top: 32px;
+  top: 42px;
   font-weight: bold;
 }
 
@@ -23,7 +46,7 @@
   font-weight: bold;
   color: gold;
   position: relative;
-  top: 14px;
+  top: 25px;
   opacity: 0;
 }
 
@@ -36,7 +59,7 @@
 
 @keyframes plus-one {
   to {
-    top: -14px;
+    top: 0;
     opacity: 1;
   }
 }

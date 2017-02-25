@@ -68,7 +68,7 @@ class Priority extends Component {
           this.state.editing
             ? <form onSubmit={ this._save.bind(this) }>
                 <input type="text" ref="editForm" defaultValue={ description } />
-                <input type="submit" value="Edit" />
+                <input type="submit" value="&#x2714;" />
               </form>
             : <div className="Priority-content">
                 <div onClick={ this._increment.bind(this) }>

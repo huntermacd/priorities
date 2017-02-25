@@ -10,9 +10,7 @@ class App extends Component {
         <div className="App-header">
           <h2>Priorities</h2>
         </div>
-        <div className="App-intro">
-          <List />
-        </div>
+        <List />
       </div>
     );
   }
